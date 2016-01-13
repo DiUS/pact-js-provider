@@ -4,6 +4,7 @@
   "description": "A JS implementation of Provider Pact",
   "main": "index.js",
   "scripts": {
+    "preinstall": "bundle install",
     "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register"
   },
   "keywords": [
