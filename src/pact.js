@@ -1,7 +1,7 @@
 'use strict';
 import q from 'q';
 
-export class Pact {
+export default class Pact {
   constructor(options) {
     console.log('created pact instance')
     this.providers = {}

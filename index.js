@@ -1,4 +1,7 @@
 process.title = 'providerTest'
 require('babel-core/register');
 
-require('./src/pact.js')
+var Pact = require('./src/pact.js');
+
+module.exports = Pact;
+
