@@ -7,7 +7,7 @@ export function rakeVerify(options) {
 
     let pactUrl = options.pactUrl
     let providerUrl = options.baseUrl
-    let BUNDLE_EXEC_RAKE = `bundle exec rake PactVerification:pact_verify[${pactUrl},${providerUrl}]`
+    let BUNDLE_EXEC_RAKE = `bundle exec rake --rakefile ./node_modules/pact-js-provider/Rakefile --libdir ./node_modules/pact-js-provider PactVerification:pact_verify[${pactUrl},${providerUrl}]`
 
     let cmd = BUNDLE_EXEC_RAKE
     childProcess.exec(cmd, (error, stdout) => {

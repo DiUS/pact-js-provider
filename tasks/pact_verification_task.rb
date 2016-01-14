@@ -5,7 +5,6 @@ module PactRake
       puts provider_base_url
       require 'pact/provider/proxy/task_helper'
 
-      # provider_base_url = 'http://localhost:5000'
       proxy_pact_helper = File.expand_path('../../spec/support/pact_helper.rb', __FILE__)
       pact_spec_configs = []
       pact_spec_configs << {pact_uri: pact_uri, pact_helper: proxy_pact_helper}

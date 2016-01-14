@@ -1,5 +1,6 @@
-import chai from 'chai'
+"use strict"
 
+import chai from 'chai'
 chai.should()
 let expect = chai.expect
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "bundle install",
-    "test": "NODE_ENV=test mocha --reporter list --recursive --compilers js:babel-core/register"
+    "test": "NODE_ENV=test node_modules/mocha/bin/mocha --reporter list --recursive --compilers js:babel-core/register"
   },
   "keywords": [
     "pact",

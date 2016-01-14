@@ -1,7 +1,7 @@
 require 'pact/provider/proxy/tasks'
 require 'pact/provider/proxy/task_helper'
 require 'rake/tasklib'
-require './tasks/pact_verification_task'
+require "#{File.dirname(__FILE__)}/tasks/pact_verification_task"
 
 $: << File.join(File.dirname(__FILE__), "lib")
 
