@@ -1,5 +1,7 @@
 'use strict';
 import q from 'q';
+import {rakeVerify} from './rubyVerifier'
+
 
 export default class Pact {
   constructor(options) {
@@ -7,6 +9,9 @@ export default class Pact {
     this.providers = {}
   }
 
+  rakeVerify(options) {
+    rakeVerify(options)
+  }
   provider(providerName, statesToRun) {
     this.providers[providerName] = statesToRun
     return this
