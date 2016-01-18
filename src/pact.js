@@ -7,26 +7,25 @@ export default class Pact {
   constructor(options) {
     console.log('created pact instance')
     this.providers = {}
+    this.providerStates = []
   }
 
   rakeVerify(options) {
     rakeVerify(options)
   }
-  provider(providerName, statesToRun) {
+
+  provider_states_for(providerName, statesToRun) {
     this.providers[providerName] = statesToRun
     return this
   }
 
   providerState(stateName, providerStateTests) {
-    if(providerStateTests != undefined) {
-      providerStateTests.setup.apply()
-    }
+    console.log('Running provider state ' + stateName)
     let {setup, execute, teardown} = providerStateTests
 
-    this._runStage.apply(setup)
+    this._runStage(setup)
       .then(this._runStage(execute))
       .then(this._runStage(teardown))
-
   }
 
   _runStage(method) {
@@ -39,7 +38,11 @@ export default class Pact {
 
   verify() {
     console.log('verifys fn')
-    this.providers.fooConsumer.apply()
+
+    for(var currentProviderState in this.providers) {
+      console.log('Running provider ' + currentProviderState)
+      this.providers[currentProviderState].apply()
+    }
     console.log('verfiged')
   }
 }

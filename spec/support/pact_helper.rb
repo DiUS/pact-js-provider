@@ -25,23 +25,19 @@ module ProviderStateServerClient
 end
 
 provider_name = "Zoo App"
-
+states = ['there is an alligator named Mary',
+  'there is not an alligator named Mary',
+  'an error occurs retrieving an alligator'
+]
 block = lambda { |provider_state|
   set_up {
 
   }
-  provider_state("there is an alligator named Mary") {
-    no_op
+  states.each {|state|
+    provider_state(state) {
+      no_op
+    }
   }
-
-  provider_state("there is not an alligator named Mary") {
-    no_op
-  }
-
-  provider_state("an error occurs retrieving an alligator") {
-    no_op
-  }
-
 
 }
 
