@@ -1,7 +1,5 @@
 require 'pact/provider/rspec'
 
-require 'sequel'
-require 'db'
 require 'animal_repository'
 require 'faraday'
 require 'rack/reverse_proxy'
@@ -24,11 +22,13 @@ module ProviderStateServerClient
   end
 end
 
-provider_name = "Zoo App"
-states = ['there is an alligator named Mary',
-  'there is not an alligator named Mary',
-  'an error occurs retrieving an alligator'
-]
+provider_name = ENV['PACT_PROVIDER_NAME']
+states = [ENV['PACT_PROVIDER_STATE']]
+# states = ['there is an alligator named Mary',
+#   'there is not an alligator named Mary',
+#   'an error occurs retrieving an alligator'
+# ]
+
 block = lambda { |provider_state|
   set_up {
 

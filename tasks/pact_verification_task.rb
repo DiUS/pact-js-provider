@@ -1,8 +1,12 @@
 module PactRake
   class Task
-    def rake_task(pact_uri, provider_base_url)
+    def rake_task(pact_uri, provider_base_url, provider_name, state_name)
       puts pact_uri
       puts provider_base_url
+      puts provider_name
+      ENV['PACT_PROVIDER_NAME'] = provider_name
+      ENV['PACT_PROVIDER_STATE'] = state_name
+
       require 'pact/provider/proxy/task_helper'
 
       proxy_pact_helper = File.expand_path('../../spec/support/pact_helper.rb', __FILE__)
