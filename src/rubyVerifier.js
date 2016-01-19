@@ -3,7 +3,7 @@ import childProcess from 'child_process'
 import q from 'q'
 import winston from 'winston'
 
-let logger = new winston.Logger()
+let logger = winston
 
 // const BUNDLE_EXEC_RAKE = 'bundle exec rake PactVerification:pact_verify[${pactUrl},${providerUrl}]'
 export function rakeVerify(providerName, stateName, options) {
