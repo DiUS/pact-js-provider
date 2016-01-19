@@ -1,11 +1,13 @@
 'use strict';
 import q from 'q';
 import {rakeVerify} from './rubyVerifier'
+import winston from 'winston'
 
+let logger = winston
 
 export default class Pact {
   constructor(options) {
-    console.log('created pact instance')
+    logger.info('created pact instance')
     this.providers = {}
     this.providerStates = []
   }
@@ -17,7 +19,7 @@ export default class Pact {
   }
 
   providerState(stateName, providerStateTests) {
-    console.log('Running provider state ' + stateName)
+    logger.info('Running provider state ' + stateName);
 
     let currentState = new ProviderState(this.currentProvider, stateName, providerStateTests)
     currentState.run()
@@ -25,13 +27,13 @@ export default class Pact {
 
 
   verify() {
-    console.log('verifing')
+    logger.info('verifing');
 
     for(var currentProviderState in this.providers) {
-      console.log('Running provider ' + currentProviderState)
+      logger.info('Running provider ' + currentProviderState)
       this.providers[currentProviderState].apply()
     }
-    console.log('verified')
+    logger.info('verified')
   }
 }
 
