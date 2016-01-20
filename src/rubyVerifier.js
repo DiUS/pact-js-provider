@@ -21,6 +21,8 @@ export function rakeVerify(providerName, stateName, options) {
 
   let cmd = BUNDLE_EXEC_RAKE
   childProcess.exec(cmd, (error, stdout) => {
+    // console.log(stdout.toString());
+    logger.info(stdout.toString())
 
     if (error) {
       logger.error(error)
@@ -28,7 +30,8 @@ export function rakeVerify(providerName, stateName, options) {
     } else {
 
       logger.info('success')
-      console.info(stdout.toString());
+      // logger.info(stdout.toString())
+      // console.log(stdout.toString());
 
       deferred.resolve();
   }
