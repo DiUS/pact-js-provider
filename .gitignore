@@ -1,5 +1,5 @@
 *.sublime-workspace
-
+lib/
 .bundle
 
 # Logs
