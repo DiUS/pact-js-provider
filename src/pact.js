@@ -3,6 +3,7 @@ import q from 'q';
 import {rakeVerify} from './rubyVerifier'
 import winston from 'winston'
 import ProviderState from './providerState'
+import _ from 'lodash'
 
 let logger = winston
 
@@ -22,18 +23,33 @@ export default class Pact {
   providerState(stateName, providerStateTests) {
     logger.info('Running provider state ' + stateName);
 
-    let currentState = new ProviderState(this.currentProvider, stateName, providerStateTests)
-    currentState.run()
-  }
+    let currentState = new ProviderState(this.currentProvider,
+      stateName, providerStateTests)
+    // return currentState.run()
+    return new Promise((resolve, reject) => {
+      currentState.run(resolve, reject)
+    })
 
+
+    // return new Promise((resolve, reject) => {
+    //   currentState.run()
+    //   resolve()
+    // })
+    // return Promise.resolve(currentState.run())
+
+  }
 
   verify() {
     logger.info('verifing');
 
-    for(var currentProviderState in this.providers) {
-      logger.info('Running provider ' + currentProviderState)
-      this.providers[currentProviderState].apply()
+    this.promise = Promise.resolve(null)
+    for(let currentProvider in this.providers) {
+
+      this.promise.then((result) => {
+        return this.providers[currentProvider].apply()
+      })
     }
+
     logger.info('verified')
   }
 }

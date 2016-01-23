@@ -12,26 +12,43 @@ export default class ProviderState {
     this.providerStateTests = providerStateTests
   }
 
-  run() {
+  run(done, reject) {
     let {setup, teardown, options} = this.providerStateTests
     this.options = options
 
-    this._runStage(setup)
-      .then(this._execute(this.options))
-      .then(this._runStage(teardown))
+    return new Promise((resolve, reject) => {
+          this._runStage(setup, resolve)
+        })
+        .then((result) => {
+          return new Promise((resolve, reject) => {
+            this._execute(this.options, resolve)
+          })
+        })
+        .then((result) => {
+          return new Promise((resolve, reject) => {
+            this._runStage(teardown, resolve)
+          })
+        })
+        .then((result) => {
+          done()
+        })
+      .catch( (err) => {
+        console.log(err)
+        logger.error(err.stack)
+        reject()
+      })
   }
 
-  _runStage(method) {
-    let deferred = q.defer()
+  _runStage(method, done) {
+    logger.debug('_runStage ')
+
     if(method != undefined) {
-      method.apply(this, [deferred])
+      return method.apply(this, [done])
     }
-    return deferred.promise
+    return ''
   }
 
-  _execute(options) {
-    return rakeVerify(this.providerName, this.stateName, this.options)
+  _execute(options, done) {
+    return rakeVerify(this.providerName, this.stateName, this.options, done)
   }
-
-
 }
