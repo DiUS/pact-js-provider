@@ -34,6 +34,9 @@ node_modules
 # Optional npm cache directory
 .npm
 
+## Directory-based project format:
+.idea/
+
 # Optional REPL history
 .node_repl_history
 
