@@ -4,7 +4,7 @@
   "description": "A JS implementation of Provider Pact",
   "main": "index.js",
   "scripts": {
-    "preinstall": "bundle install --path .bundle/ && npm run compile",
+    "preinstall": "bundle install --path ~/.bundle && npm run compile",
     "test": "NODE_ENV=test node_modules/mocha/bin/mocha --reporter list --recursive --compilers js:babel-core/register",
     "compile": "babel -d lib/ src/",
     "prepublish": "npm run compile"

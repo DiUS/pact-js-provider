@@ -1,11 +1,9 @@
 'use strict';
 import q from 'q';
 import {rakeVerify} from './rubyVerifier'
-import winston from 'winston'
+import logger from './logger';
 import ProviderState from './providerState'
 import _ from 'lodash'
-
-let logger = winston
 
 export default class Pact {
   constructor(options) {

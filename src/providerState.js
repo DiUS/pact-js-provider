@@ -1,9 +1,7 @@
 'use strict';
 import q from 'q';
-import {rakeVerify} from './rubyVerifier'
-import winston from 'winston'
-
-let logger = winston
+import {rakeVerify} from './rubyVerifier';
+import logger from './logger';
 
 export default class ProviderState {
   constructor(providerName, stateName, providerStateTests){
