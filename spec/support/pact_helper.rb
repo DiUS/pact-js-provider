@@ -13,13 +13,13 @@ end
 
 require ENV['PACT_PROJECT_PACT_HELPER'] if ENV.fetch('PACT_PROJECT_PACT_HELPER','') != ''
 
-provider_name = ENV['PACT_PROVIDER_NAME']
+consumer_name = ENV['PACT_PROVIDER_NAME']
 states = [ENV['PACT_PROVIDER_STATE']]
 
 module ProviderStateServerClient
   def set_up_state provider_state
     puts "Setting up provider state '#{provider_state}' using provider state server at #{PROVIDER_STATE_SERVER_SET_UP_URL}"
-    Faraday.post(PROVIDER_STATE_SERVER_SET_UP_URL, {"consumer" => provider_name, "provider_state" => provider_state })
+    Faraday.post(PROVIDER_STATE_SERVER_SET_UP_URL, {"consumer" => consumer_name, "provider_state" => provider_state })
   end
 end
 
@@ -40,4 +40,4 @@ Pact.configure do | config |
   config.include ProviderStateServerClient
 end
 
-Pact.provider_states_for(provider_name, &block)
+Pact.provider_states_for(consumer_name, &block)
