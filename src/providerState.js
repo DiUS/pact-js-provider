@@ -5,48 +5,44 @@ import logger from './logger';
 
 export default class ProviderState {
   constructor(providerName, stateName, providerStateTests){
-    this.providerName = providerName
-    this.stateName = stateName
-    this.providerStateTests = providerStateTests
+    this.providerName = providerName;
+    this.stateName = stateName;
+    this.providerStateTests = providerStateTests;
   }
 
-  run(done, reject) {
-    let {setup, teardown, options} = this.providerStateTests
-    this.options = options
+  run() {
+    let {setup, teardown, options} = this.providerStateTests;
+    this.options = options;
 
-    return new Promise((resolve, reject) => {
-          this._runStage(setup, resolve)
+    return this._runStage(setup)
+        .then(result => {
+            logger.info("runStage setup result", result);
+            return this._execute(this.options);
         })
-        .then((result) => {
-          return new Promise((resolve, reject) => {
-            this._execute(this.options, resolve)
-          })
+        .then(result => {
+            logger.info("execute result", result);
+            return this._runStage(teardown);
         })
-        .then((result) => {
-          return new Promise((resolve, reject) => {
-            this._runStage(teardown, resolve)
-          })
+        .then(result => {
+            logger.info("teardown setup result", result);
+            Promise.resolve(result);
         })
-        .then((result) => {
-          done()
-        })
-      .catch( (err) => {
-        console.log(err)
-        logger.error(err.stack)
-        reject()
-      })
+        .catch(err => {
+            logger.error(err.stack);
+            Promise.reject(result);
+        });
   }
 
-  _runStage(method, done) {
-    logger.debug('_runStage ')
-
+  _runStage(method) {
+    logger.debug('_runStage ');
     if(method != undefined) {
-      return method.apply(this, [done])
+      return Promise.resolve(method.apply(this));
     }
-    return ''
+      logger.error('failed _runStage');
+    return Promise.reject(new Error('Method is undefined'));
   }
 
-  _execute(options, done) {
-    return rakeVerify(this.providerName, this.stateName, this.options, done)
+  _execute(options) {
+    return rakeVerify(this.providerName, this.stateName, options)
   }
 }
