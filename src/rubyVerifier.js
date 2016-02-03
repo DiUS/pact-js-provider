@@ -5,30 +5,39 @@ import {exec} from 'child-process-promise';
 import q from 'q'
 import logger from './logger';
 
-
-// const BUNDLE_EXEC_RAKE = 'bundle exec rake PactVerification:pact_verify[${pactUrl},${providerUrl}]'
-export function rakeVerify(providerName, stateName, options) {
-    logger.info('rake options ');
-    logger.debug('providerName', providerName);
+export function rakeVerify(consumerName, stateName, options) {
+    logger.debug('################## rake verify###########');
+    logger.debug('rake options ', options);
+    logger.debug('providerName', consumerName);
     logger.debug('stateName', stateName);
-    logger.debug('options', options);
+    logger.debug('#########################################');
 
 
     let pactUrl = options.pactUrl;
     let providerUrl = options.baseUrl;
 
-    let BUNDLE_EXEC_RAKE = `bundle exec rake --rakefile ./node_modules/pact-js-provider/Rakefile PactVerification:pact_verify[${pactUrl},${providerUrl},\'${providerName}\','${stateName}']`
+    let BUNDLE_EXEC_RAKE = `bundle exec rake --rakefile ./node_modules/pact-js-provider/Rakefile PactVerification:pact_verify[${pactUrl},${providerUrl},\'${consumerName}\','${stateName}']`
     let cmd = BUNDLE_EXEC_RAKE;
-    logger.info('cmd', cmd);
+    logger.debug('cmd', cmd);
     return exec(cmd)
         .then((result) => {
-            logger.debug("rake executed");
-            logger.info(result.stdout);
+            logger.debug('rake executed result');
+            logger.info('stdout:', result.stdout);
+            if(result.stderr){
+                logger.error('rake failed stderr:', stderr);
+            }
             return Promise.resolve(result);
         })
-        .fail((err) => {
-            logger.error("Pact failed for " + providerName + " for state " + stateName);
-            logger.error(err.stdout);
+        .fail(err => {
+            logger.error("Pact failed for " + consumerName + " for state " + stateName);
+            logger.error('Error: ', err.stdout);
+            if(result.stderr){
+                logger.error('rake failed stderr:', stderr);
+            }
             return Promise.reject(err);
+        })
+        .progress(childProcess => {
+            logger.info('childProcess.pid: ', childProcess.pid);
         });
 }
+
