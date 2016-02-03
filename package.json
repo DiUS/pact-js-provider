@@ -24,10 +24,10 @@
     "babel-plugin-transform-class-properties": "^6.4.0",
     "body-parser": "^1.14.2",
     "child-process-promise": "^1.1.0",
+    "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "lodash": "^4.0.0",
     "morgan": "^1.6.1",
-    "q": "^1.4.1",
     "winston": "^2.1.1"
   },
   "devDependencies": {

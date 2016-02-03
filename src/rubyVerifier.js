@@ -2,7 +2,7 @@
 import childProcess from 'child_process';
 import {exec} from 'child-process-promise';
 
-import q from 'q'
+import {Promise} from 'es6-promise';
 import logger from './logger';
 
 export function rakeVerify(consumerName, stateName, options) {

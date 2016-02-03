@@ -1,5 +1,5 @@
 'use strict';
-import q from 'q';
+import {Promise} from 'es6-promise';
 import {rakeVerify} from './rubyVerifier';
 import logger from './logger';
 
