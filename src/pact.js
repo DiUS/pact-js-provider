@@ -12,18 +12,14 @@ export default class Pact {
     this.providerStates = [];
   }
 
-  provider_states_for(providerName, statesToRun) {
-    logger.info('providerName', providerName);
-    logger.info('statesToRun', statesToRun);
-    this.currentProvider = providerName;
-    this.providers[providerName] = statesToRun;
-    logger.info('Provider State', this.providers);
+  provider_states_for(consumerName, statesToRun) {
+    this.providers[consumerName] = statesToRun;
     return this
   }
 
-  providerState(stateName, providerStateTests) {
+  providerState(consumerName ,stateName, providerStateTests) {
     logger.info('Running provider state ' + stateName);
-    let currentState = new ProviderState(this.currentProvider, stateName, providerStateTests)
+    let currentState = new ProviderState(consumerName, stateName, providerStateTests)
     return currentState.run();
   }
 

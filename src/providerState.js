@@ -5,6 +5,7 @@ import logger from './logger';
 
 export default class ProviderState {
   constructor(providerName, stateName, providerStateTests){
+      logger.debug('providerName in constructor', providerName);
     this.providerName = providerName;
     this.stateName = stateName;
     this.providerStateTests = providerStateTests;
@@ -20,7 +21,7 @@ export default class ProviderState {
             return this._execute(this.options);
         })
         .then(result => {
-            logger.info("execute result", result);
+            logger.info("execute result", result.stdout);
             return this._runStage(teardown);
         })
         .then(result => {
@@ -38,7 +39,6 @@ export default class ProviderState {
     if(method != undefined) {
       return Promise.resolve(method.apply(this));
     }
-      logger.error('failed _runStage');
     return Promise.reject(new Error('Method is undefined'));
   }
 
