@@ -31,8 +31,8 @@ export function rakeVerify(consumerName, stateName, options) {
         .fail(err => {
             logger.error("Pact failed for " + consumerName + " for state " + stateName);
             logger.error('Error: ', err.stdout);
-            if(result.stderr){
-                logger.error('rake failed stderr:', stderr);
+            if(err.stderr){
+                logger.error('rake failed stderr:', err.stderr);
             }
             return Promise.reject(err);
         })
