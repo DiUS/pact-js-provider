@@ -7,29 +7,29 @@ import _ from 'lodash'
 
 export default class Pact {
   constructor() {
-    logger.info('created pact instance')
     this.providers = {};
-    this.providerStates = [];
+    this.consumber = '';
   }
 
   provider_states_for(consumerName, statesToRun) {
     this.providers[consumerName] = statesToRun;
+    this.consumber = consumerName;
     return this
   }
 
-  providerState(consumerName ,stateName, providerStateTests) {
-    logger.info('Running provider state ' + stateName);
-    let currentState = new ProviderState(consumerName, stateName, providerStateTests)
+  providerState(stateName, providerStateTests) {
+    logger.debug('Running provider state ' + stateName);
+    logger.debug('Test', this.consumber);
+    let currentState = new ProviderState(this.consumber, stateName, providerStateTests);
     return currentState.run();
   }
 
   verify() {
-    logger.info('verifing');
+    logger.info('start verifing');
     let promises = [];
     for(let currentProvider in this.providers) {
-      promises.push(new Promise((resolve, reject) => {
-          resolve(this.providers[currentProvider].apply())}).catch(err => {reject(err);}));
+      promises.push(this.providers[currentProvider]());
     };
-    return Promise.all(promises).then(()=>{logger.info('verified')}).catch(err => logger.error(err));
+    return Promise.all(promises);
   }
 }
