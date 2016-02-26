@@ -1,3 +1,3 @@
-var Pact = require('./src/pact.js')
+var Pact = require('./lib/pact.js')
 
 module.exports = Pact;
