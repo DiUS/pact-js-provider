@@ -2,7 +2,7 @@
   "name": "pact-js-provider",
   "version": "1.0.2",
   "description": "A JS implementation of Provider Pact",
-  "main": "index.js",
+  "main": "index_es6.js",
   "scripts": {
     "preinstall": "bundle install --path .bundle",
     "test": "NODE_ENV=test node_modules/mocha/bin/mocha --reporter list --recursive --compilers js:babel-core/register",
@@ -27,6 +27,7 @@
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "lodash": "^4.0.0",
+    "mocha": "^2.4.5",
     "morgan": "^1.6.1",
     "winston": "^2.1.1"
   },

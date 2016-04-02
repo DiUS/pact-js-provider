@@ -4,32 +4,38 @@ import {rakeVerify} from './rubyVerifier'
 import logger from './logger';
 import ProviderState from './providerState'
 import _ from 'lodash'
+import Mocha from 'mocha'
+import fs from 'fs'
+import path from 'path'
+import pact_dsl from './pact_dsl'
+
+
+export function runPact(test) {
+  let mocha = new Mocha(
+  {
+    ui: 'pact_dsl'
+  })
+
+  mocha.addFile(test)
+
+  mocha.run(function(failures) {
+    process.on('exit', function () {
+      process.exit(failures);
+    });
+  })
+}
 
 export default class Pact {
-  constructor() {
-    this.providers = {};
-    this.consumber = '';
+  constructor(provider, consumer, options) {
+    this.provider = provider
+    this.consumer = consumer;
+    this.options = options
   }
 
-  provider_states_for(consumerName, statesToRun) {
-    this.providers[consumerName] = statesToRun;
-    this.consumber = consumerName;
-    return this
-  }
-
-  providerState(stateName, providerStateTests) {
+  providerState(stateName) {
     logger.debug('Running provider state ' + stateName);
-    logger.debug('Test', this.consumber);
-    let currentState = new ProviderState(this.consumber, stateName, providerStateTests);
-    return currentState.run();
-  }
+    logger.debug('Test', this.consumer);
 
-  verify() {
-    logger.info('start verifing');
-    let promises = [];
-    for(let currentProvider in this.providers) {
-      promises.push(this.providers[currentProvider]());
-    };
-    return Promise.all(promises);
+    return rakeVerify(this.consumer, stateName, this.options)
   }
 }

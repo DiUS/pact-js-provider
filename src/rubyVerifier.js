@@ -12,7 +12,6 @@ export function rakeVerify(consumerName, stateName, options) {
     logger.debug('stateName', stateName);
     logger.debug('#########################################');
 
-
     let pactUrl = options.pactUrl;
     let providerUrl = options.baseUrl;
 
@@ -21,12 +20,11 @@ export function rakeVerify(consumerName, stateName, options) {
     logger.debug('cmd', cmd);
     return exec(cmd)
         .then((result) => {
-            logger.debug('rake executed result');
             logger.info('stdout:', result.stdout);
             if(result.stderr){
                 logger.error('rake failed stderr:', stderr);
             }
-            return Promise.resolve(result);
+            return result
         })
         .fail(err => {
             logger.error("Pact failed for " + consumerName + " for state " + stateName);
@@ -34,10 +32,9 @@ export function rakeVerify(consumerName, stateName, options) {
             if(err.stderr){
                 logger.error('rake failed stderr:', err.stderr);
             }
-            return Promise.reject(err);
+            return err
         })
         .progress(childProcess => {
-            logger.info('childProcess.pid: ', childProcess.pid);
-        });
+            logger.info('childProcess.pid: ', childProcess.pid)
+        })
 }
-
