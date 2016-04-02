@@ -23,5 +23,5 @@ You may need Babel globally installed???
 
 `npm install -g babel`???
 
-See test repo
+See [test repo](https://github.com/DiUS/pact-js-provider-test)
 
