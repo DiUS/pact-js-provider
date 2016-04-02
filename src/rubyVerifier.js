@@ -16,7 +16,7 @@ export function rakeVerify(consumerName, stateName, options) {
     let pactUrl = options.pactUrl;
     let providerUrl = options.baseUrl;
 
-    let BUNDLE_EXEC_RAKE = `bundle exec rake --rakefile ./node_modules/pact-js-provider/Rakefile PactVerification:pact_verify[${pactUrl},${providerUrl},\'${consumerName}\','${stateName}']`
+    let BUNDLE_EXEC_RAKE = `BUNDLE_GEMFILE=./node_modules/pact-js-provider/Gemfile bundle exec rake --rakefile ./node_modules/pact-js-provider/Rakefile PactVerification:pact_verify[${pactUrl},${providerUrl},\'${consumerName}\','${stateName}']`
     let cmd = BUNDLE_EXEC_RAKE;
     logger.debug('cmd', cmd);
     return exec(cmd)
