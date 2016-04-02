@@ -1,6 +1,6 @@
 *.sublime-workspace
 lib/
-.bundle
+.bundle/
 
 /node_modules/
 
