@@ -7,8 +7,7 @@ Setup
 =======
 
 Requirements
-============
-* You will need Ruby 2+. You can install this via ruby-install, rvm[rvm](https://rvm.io/) or chruby[chruby](https://github.com/postmodern/chruby).
+* You will need Ruby 2+. You can install this via ruby-install, [rvm](https://rvm.io/) or [chruby](https://github.com/postmodern/chruby).
 * bundler
 * node (tested on version 4.2.1)
 * npm
@@ -26,21 +25,21 @@ Bundler version 1.11.2
 
 Any project using Pact will then on preinstall run 'bundle install' to install the ruby dependencies.
 
-Test it works `npm run test`
-
-You may need Babel globally installed???
-
-`npm install -g babel`???
 
 See [test repo](https://github.com/DiUS/pact-js-provider-test)
 
 
 ## Links
-[Pacts](https://github.com/realestate-com-au/pact) - ruby reference implementation 
+[Pacts](https://github.com/realestate-com-au/pact) - ruby reference implementation
+ 
 [Simplifying microservices testing with pacts](http://dius.com.au/2014/05/19/simplifying-micro-service-testing-with-pacts/) - Ron Holshausen (one of the original pact authors)
+
 [Pact specification](https://github.com/pact-foundation/pact-specification)
+
 [Integrated tests are a scam](https://vimeo.com/80533536) - J.B. Rainsberger
+
 [Consumer Driven Contracts](http://martinfowler.com/articles/consumerDrivenContracts.html) - Ian Robinson
+
 [Integration Contract Tests](http://martinfowler.com/bliki/IntegrationContractTest.html) - Martin Fowler
 
 ## Roadmap
