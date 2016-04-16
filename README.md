@@ -1,6 +1,6 @@
 # Node Provider for Pact
 
-Matches pact for Providers. See PACT for details.
+Matches pact for Providers. See [Pacts](https://github.com/realestate-com-au/pact) for more information on Pact.
 
 ## Setup
 
@@ -48,8 +48,7 @@ Pact-js-provider uses mocha under the hood. As a result currently to run the tes
 * pact file
 * base url
 
-The providerState requires the name of the providerState to be tested. 
-
+The providerState requires the name of the providerState to be tested. Currently this will just output the content from the ruby implementation. There is no error code returned on failure.  
 
 ## Links
 [Pacts](https://github.com/realestate-com-au/pact) - ruby reference implementation
