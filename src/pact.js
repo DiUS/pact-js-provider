@@ -35,7 +35,6 @@ export default class Pact {
   providerState(stateName) {
     logger.debug('Running provider state ' + stateName);
     logger.debug('Test', this.consumer);
-
     return rakeVerify(this.consumer, stateName, this.options)
   }
 }

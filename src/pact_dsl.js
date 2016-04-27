@@ -50,11 +50,9 @@ export default Mocha.interfaces['pact_dsl'] = (suite) => {
       let suite = suites[0];
       let test = new Test(pact.provider, pact.providerState.bind(pact, currentProviderState));
       suite.addTest(test);
-      fn.call(suite);
+
       return test;
     }
-
-    context.run = mocha.options.delay && common.runWithSuite(suite);
 
     /**
      * Describes a specification or test-case with the given `title`
