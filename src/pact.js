@@ -2,7 +2,6 @@
 import {Promise} from 'es6-promise';
 import {rakeVerify} from './rubyVerifier'
 import logger from './logger';
-import ProviderState from './providerState'
 import _ from 'lodash'
 import Mocha from 'mocha'
 import fs from 'fs'
