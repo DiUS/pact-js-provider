@@ -8,20 +8,21 @@ import fs from 'fs'
 import path from 'path'
 import pact_dsl from './pact_dsl'
 
+function onFailure(failures) {
+  process.on('exit', () =>  {
+    process.exit(failures);
+  })
+}
 
-export function runPact(test) {
-  let mocha = new Mocha(
-  {
+export function runPact(...tests) {
+  let mocha = new Mocha({
     ui: 'pact_dsl'
   })
 
-  mocha.addFile(test)
-
-  mocha.run(function(failures) {
-    process.on('exit', function () {
-      process.exit(failures);
-    });
-  })
+ _(tests).forEach( (test) => {
+   mocha.addFile(test)
+ })
+ mocha.run(onFailure)
 }
 
 export default class Pact {
