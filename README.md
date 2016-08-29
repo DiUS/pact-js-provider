@@ -1,3 +1,8 @@
+# DEPRECATED - DO NOT USE 
+
+This project has been merged into [Pact Foundation](https://github.com/pact-foundation/pact-js) and is no longer supported
+
+
 # Node Provider for Pact
 
 Matches pact for Providers. See [Pacts](https://github.com/realestate-com-au/pact) for more information on Pact.
